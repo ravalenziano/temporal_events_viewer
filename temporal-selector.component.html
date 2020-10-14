@@ -1,0 +1,47 @@
+<!--<ng-template *ngIf="events != null">-->
+  <div *ngIf="temporalEvents != null" class="temporalSelector" #temporalSelector>
+    <div [ngClass]="{'timeline': true, 'loaded': !isLoading}" class="timeline" #timeline>
+      <div class="events-wrapper" #eventsWrapper>
+        <ol class="day-markers">
+          <li><a class="day-marker"><div>Sun</div> </a></li>
+          <li><a class="day-marker"><div>Mon</div> </a></li>
+          <li><a class="day-marker"><div>Tue</div> </a></li>
+          <li><a class="day-marker"><div>Wed</div> </a></li>
+          <li><a class="day-marker"><div>Thu</div> </a></li>
+          <li><a class="day-marker"><div>Fri</div> </a></li>
+          <li><a class="day-marker"><div>Sat</div> </a></li>
+        </ol>
+        <div (window:resize)="onResize($event)" class="events" #events>
+
+
+         
+            <ol class="event-labels" *ngFor="let label of labels">
+              <li><a class="event-label"> <span class="label">{{label.date}}</span></a></li>
+            </ol>
+
+            <ol class="event-list" #eventList>
+              <li *ngFor="let event of temporalEvents;"><a [ngClass]="{'event': true, 'selected': _curEventId == event.id}" (click)="eventClicked($event, event.id)"></a></li>
+            </ol>
+
+            <span #fillingLine class="filling-line" aria-hidden="true"></span>
+     
+            <span #eventsLine class="events-line" aria-hidden="true"></span>
+
+        </div>
+      </div>
+      <ul class="navigationWeek">
+        
+        <li><a  [ngClass]="{'prevWeek': true, 'disabled': navWeekBackDisabled()}" [routerLink]="" (click)="prevWeek()"><mat-icon>forward</mat-icon></a></li>
+        <li><a  [ngClass]="{'nextWeek': true, 'disabled': navWeekForwardDisabled()}" [routerLink]="" (click)="nextWeek()" href="#0" ><mat-icon>forward</mat-icon></a></li>
+        
+      </ul>
+
+      <ul class="navigationEvent">
+        <li><a  [ngClass]="{'prevEvent': true, 'disabled': curIndex == 0}" [routerLink]="" (click)="prevEvent()"><mat-icon>chevron_left</mat-icon></a></li>
+        <li><a [ngClass]="{'nextEvent': true, 'disabled': curIndex == temporalEvents.length - 1}" [routerLink]="" (click)="nextEvent()" class="nextEvent"><mat-icon>chevron_right</mat-icon></a></li>
+      </ul>
+    </div>
+
+  </div>
+<!--</ng-template>-->
+

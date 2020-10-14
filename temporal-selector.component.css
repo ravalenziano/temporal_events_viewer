@@ -1,0 +1,380 @@
+
+  .temporalSelector ol, .temporalSelector ul {
+    list-style: none;
+  }
+
+  .temporalSelector .timeline {
+    position: relative;
+    height: 110px;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0;
+  }
+
+  
+  .temporalSelector .timeline.loaded{
+      opacity: 1;
+  }
+
+  .temporalSelector .events-wrapper {
+    position: relative;
+    height: 100%;
+    margin: 0 80px;
+    overflow-x: hidden;
+  }
+
+  .temporalSelector .label{
+      font-size: 0.9rem;
+  }
+
+
+  .temporalSelector .events {
+    /* this is the grey line/timeline */
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 85px;
+    height: 2px;
+    width: 100%;
+    /* width will be set using JavaScript */
+    background: none;
+    -webkit-transition: -webkit-transform 0.4s;
+    -moz-transition: -moz-transform 0.4s;
+    transition: transform 0.4s;
+  }
+
+  .temporalSelector .events-line {
+    position: absolute;
+    height: 100%;
+    background: #dfdfdf;
+    left:0px;
+    top: 0px;
+    width: 100%;
+  }
+
+.temporalSelector .filling-line {
+  /* this is used to create the green line filling the timeline */
+  position: absolute;
+  z-index: 7;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(0, 170, 217);
+  -webkit-transform: scaleX(0);
+  -moz-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  -o-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: left center;
+  -moz-transform-origin: left center;
+  -ms-transform-origin: left center;
+  -o-transform-origin: left center;
+  transform-origin: left center;
+  -webkit-transition: -webkit-transform 0.3s;
+  -moz-transition: -moz-transform 0.3s;
+  transition: transform 0.3s;
+}
+
+  .temporalSelector .day-markers .temporalSelector .day-markers a {
+    z-index: -1;
+  }
+
+  .temporalSelector .day-markers a, .temporalSelector .event-labels a {
+    position: absolute;
+    bottom: 0;
+    
+    left: 0px;
+    text-align: center;
+    font-size: 1.3rem;
+    padding-bottom: 15px;
+    color: #383838;
+    /* fix bug on Safari - text flickering while timeline translates */
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+    .temporalSelector .day-markers a::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      right: auto;
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      transform: translateX(-50%);
+      bottom: -5px;
+      height: 12px;
+      width: 2px;
+      background-color: #dfdfdf;
+      -webkit-transition: background-color 0.3s, border-color 0.3s;
+      -moz-transition: background-color 0.3s, border-color 0.3s;
+      transition: background-color 0.3s, border-color 0.3s;
+      top: 70px;
+    }
+  .temporalSelector .day-marker {
+    top: 10px;
+
+  }
+
+
+  .temporalSelector .event-label {
+    width: 6rem;
+    z-index: 3;
+  }
+
+
+
+
+  .temporalSelector .event-list a {
+    position: absolute;
+    bottom: 0;
+    z-index: 15;
+    left: 0px;
+    text-align: center;
+    font-size: 1.3rem;
+    padding-bottom: 15px;
+    color: #383838;
+    /* fix bug on Safari - text flickering while timeline translates */
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+    .temporalSelector .event-list a::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      right: auto;
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      transform: translateX(-50%);
+      bottom: -5px;
+      height: 12px;
+      width: 12px;
+      background-color: white;
+      border-radius: 50%;
+      border: 2px solid #dfdfdf;
+      cursor: pointer;
+      -webkit-transition: background-color 0.3s, border-color 0.3s;
+      -moz-transition: background-color 0.3s, border-color 0.3s;
+      transition: background-color 0.3s, border-color 0.3s;
+      z-index: 4;
+    }
+    .temporalSelector .event-list a.selected{
+        z-index: 25;
+    }
+      .temporalSelector .event-list a.selected::after {
+        background-color: darkorange;
+      }
+
+    @media only screen and (min-width: 1100px) {
+  .temporalSelector {
+    margin: 3em auto;
+  }
+
+}
+
+.temporalSelector .navigationEvent a {
+  /* these are the left/right arrows to navigate the timeline */
+  position: absolute;
+  z-index: 1;
+  top: 85px;
+  bottom: auto;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  height: 34px;
+  width: 34px;
+  border-radius: 50%;
+  border: 2px solid #a098b5;
+  color: #a098b5;
+  white-space: nowrap;
+  -webkit-transition: border-color 0.3s;
+  -moz-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  display: inline-block;
+  text-align: center
+}
+
+  .temporalSelector .navigationEvent a.prevEvent {
+    left: 0px;
+  }
+
+.temporalSelector .navigationEvent a.nextEvent{
+    right: 0px;
+}
+
+  .temporalSelector .navigationEvent a mat-icon {
+    vertical-align: middle;
+    color: #a098b5;
+  }
+  .temporalSelector .navigationEvent a.disabled {
+    border-color: #dfdfdf;
+  }
+  .temporalSelector .navigationEvent a.disabled mat-icon {
+    color: #dfdfdf;
+  }
+
+.temporalSelector .navigationWeek a {
+  /* these are the left/right arrows to navigate the timeline */
+  position: absolute;
+  z-index: 1;
+  top: 85px;
+  bottom: auto;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  height: 34px;
+  width: 34px;
+  border-radius: 50%;
+  border: 2px solid #a098b5;
+  /* replace text with an icon */
+  overflow: hidden;
+  color: transparent;
+  text-indent: 100%;
+  white-space: nowrap;
+  -webkit-transition: border-color 0.3s;
+  -moz-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+}
+
+
+
+  .temporalSelector .navigationWeek a.prevWeek {
+    left: 40px;
+    -webkit-transform: translateY(-50%) rotate(180deg);
+    -moz-transform: translateY(-50%) rotate(180deg);
+    -ms-transform: translateY(-50%) rotate(180deg);
+    -o-transform: translateY(-50%) rotate(180deg);
+    transform: translateY(-50%) rotate(180deg);
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .temporalSelector .navigationWeek a.nextWeek {
+    right: 40px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .temporalSelector .navigationWeek a.prevWeek mat-icon {
+    left:0px;
+  }
+
+  .temporalSelector .navigationWeek a.nextWeek mat-icon, .temporalSelector .navigationWeek a.prevWeek mat-icon {
+    position: absolute;
+    left: -20px;
+    top: 2.5px;
+    z-index: 50;
+    color: #a098b5;
+  }
+
+  .temporalSelector .navigationWeek a.disabled {
+    border-color: #dfdfdf;
+  }
+
+  .temporalSelector .navigationWeek a.disabled mat-icon {
+    color: #dfdfdf;
+  }
+
+
+@media only screen and (max-width: 768px) {
+  .temporalSelector .day-markers a {
+    font-size: 0.85rem;
+
+  }
+
+  .temporalSelector .label {
+    font-size: 0.5rem;
+  }
+
+  /*Adjust the height*/
+  .temporalSelector .timeline {
+    height: 90px;
+  }
+
+  .temporalSelector .events {
+    top: 70px;
+  }
+
+
+  .temporalSelector .navigationEvent a {
+    top: 70px;
+  }
+
+  .temporalSelector .navigationWeek a {
+    top: 70px;
+  }
+
+  .temporalSelector .day-markers a::after {
+      top: 55px;
+  }
+
+  .temporalSelector .day-marker {
+    top: 10px;
+  }
+
+  /***End adjust height*/
+}
+
+@media only screen and (max-width: 567px) {
+  .temporalSelector .day-markers a {
+    font-size: 0.5rem;
+  }
+
+  .temporalSelector .events-wrapper {
+    margin: 0 40px;
+  }
+
+  .navigationWeek{
+      display:none;
+  }
+
+
+  /*Adjust the height*/
+  .temporalSelector .timeline {
+    height: 70px;
+  }
+
+  .temporalSelector .events {
+    top: 50px;
+  }
+
+
+  .temporalSelector .navigationEvent a {
+    top: 50px;
+  }
+
+  .temporalSelector .navigationWeek a {
+    top: 50px;
+  }
+
+  .temporalSelector .day-markers a::after {
+    top: 35px;
+  }
+
+  .temporalSelector .day-marker {
+    top: 10px;
+  }
+
+  /***End adjust height*/
+
+}
+
+@media only screen and (max-width: 510px) {
+ 
+}
